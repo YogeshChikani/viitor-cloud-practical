@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -55,7 +56,17 @@ class RegisterController extends Controller
             'dob'        => ['required', 'date', 'before:today'],
             'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'   => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => ['required', 'captcha']
         ]);
+
+        // return $request->validate([
+        //     'first_name'           => 'required',
+        //     'last_name'            => 'required',
+        //     'dob'                  => 'required|date|before:today',
+        //     'email'                => 'required|email',
+        //     'password'             => 'required|min:8|confirmed',
+        //     'g-recaptcha-response' => 'required|captcha',
+        // ]);
     }
 
     /**

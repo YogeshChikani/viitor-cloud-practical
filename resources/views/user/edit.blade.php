@@ -26,18 +26,18 @@
     <section class="content">
         <div class="container-fluid">
             @if ( $message = Session::get( 'success' ) )
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            {{$message}}
-                        </div>
-                    @endif
-                    @if ( $message = Session::get( 'error-message' ) )
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            {{$message}}
-                        </div>
-                    @endif
-                    @if ($errors->any())
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{$message}}
+                </div>
+            @endif
+            @if ( $message = Session::get( 'error-message' ) )
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{$message}}
+                </div>
+            @endif
+            @if ($errors->any())
                 <div class="alert alert-danger fade show" role="alert">
                     <div class="alert-text">
                         @foreach ($errors->all() as $error)
@@ -57,7 +57,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Quick Example</h3>
+                            <h3 class="card-title">Edit Profile</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -84,19 +84,20 @@
                                     <input type="email" name="email" class="form-control" id="exampleInputEmail1"
                                         placeholder="Enter email" value="{{ $edit->email ?? '' }}">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword21"
+                                    <input type="password" name="password" class="form-control" id="password"
                                         placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Confirm Password</label>
                                     <input type="password" name="password_confirmation" class="form-control" id="exampl5eInputEmail1"
                                         placeholder="Enter email">
+                                        <input type="hidden" name="edit_id" id="edit_id" value="{{ $edit->id ?? '' }}">
                                 </div>
 
-                                
+
                             </div>
                             <!-- /.card-body -->
 
@@ -118,4 +119,10 @@
 </div>
 <!-- /.content-wrapper -->
 
+@endsection
+
+@section('specificscript')
+<script src="{{ asset('js/jquery-validation/dist/jquery.validate.js') }}" type="text/javascript" defer></script>
+<script src="{{ asset('js/jquery-validation/dist/additional-methods.js') }}" type="text/javascript" defer></script>
+<script src="{{ asset('js/user.js')}}"></script>
 @endsection
