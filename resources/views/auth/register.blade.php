@@ -1,11 +1,37 @@
 @extends('layouts.app')
 @section('specificlink')
-    {!! RecaptchaV3::initJs() !!}
+
 @endsection
 
 
 @section('content')
 <div class="container">
+    @if ( $message = Session::get( 'success' ) )
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{$message}}
+            </div>
+        @endif
+        @if ( $message = Session::get( 'error-message' ) )
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{$message}}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger fade show" role="alert">
+                <div class="alert-text">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </div>
+                <div class="alert-close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="la la-close"></i></span>
+                    </button>
+                </div>
+            </div>
+        @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -42,7 +68,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
 
@@ -76,7 +102,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <input type="hidden" name="edit_id" id="edit_id" value="">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,16 +119,14 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
-                                {!! RecaptchaV3::field('register') !!}
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group row">
+                            <div class="col-md-6" style="margin-left:237px">
+                                  <strong>Recaptcha:</strong>
+                                  {!! NoCaptcha::renderJs() !!}
+                                  {!! NoCaptcha::display() !!}
                             </div>
-                        </div> --}}
+                         </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -119,4 +143,7 @@
 </div>
 @endsection
 @section('specificscript')
+<script src="{{ asset('js/jquery-validation/dist/jquery.validate.js') }}" type="text/javascript" defer></script>
+<script src="{{ asset('js/jquery-validation/dist/additional-methods.js') }}" type="text/javascript" defer></script>
+<script src="{{ asset('js/user.js')}}"></script>
 @endsection

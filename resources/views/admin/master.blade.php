@@ -26,6 +26,12 @@
         <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+        <style>
+            .username, .description{
+                margin-left : 1px !important;
+            }
+        </style>
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -88,7 +94,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a href="{{ route( 'edit-profile' ) }}" class="nav-link active">
+                        <a href="{{ route( 'edit-profile' ) }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Edit Profile
@@ -96,10 +102,10 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview menu-open">
-                        <a href="{{ route( 'blog' ) }}" class="nav-link active">
+                        <a href="{{ route( 'blog' ) }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Blog
+                           My Blog
                         </p>
                         </a>
                     </li>
@@ -201,6 +207,20 @@
         <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+        <script type="text/javascript">
+
+            $( '.nav-link' ).each( function() {
+
+                if( $( this ).attr( 'href' ) == $(location).attr( 'href' ) ) {
+                    $( this ).addClass( 'active' );
+                }
+
+            } );
+
+        </script>
+
+        @yield('specificscript')
     </body>
 </html>
 

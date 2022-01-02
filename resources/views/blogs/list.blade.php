@@ -35,6 +35,7 @@
                             <div class="user-block">
                                 {{-- <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image"> --}}
                                 <span class="username"><a href="#">{{ $blog->title }}</a></span>
+                                <span class="username"><a href="#">{{ $blog->first_name.' '.$blog->last_name }}</a></span>
                                 <span class="description">{{ date( 'd M, Y', strtotime( $blog->created_at ) ) }}</span>
                             </div>
                             <!-- /.user-block -->
