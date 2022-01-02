@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview menu-open">
-                        <a href="{{ route( 'blog' ) }}" class="nav-link">
+                        <a href="{{ route( 'blog' ) }}" class="nav-link blog">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                            My Blog
@@ -217,6 +217,10 @@
                 }
 
             } );
+
+            if( 'http://127.0.0.1:8000/home' == $(location).attr( 'href' ) ) {
+                $( '.blog' ).addClass( 'active' );
+            }
 
         </script>
 
